@@ -5,3 +5,7 @@
     - name: print something 
       debug:
         msg: "Hello world"
+
+    - name: print something 
+      debug:
+        msg: "goodbye world"
