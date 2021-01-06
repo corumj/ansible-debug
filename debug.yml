@@ -1,6 +1,7 @@
 ---
 - name: test serial strategies with Tower 
   hosts: all 
+  serial: 1
   tasks:
     - name: print something 
       debug:
