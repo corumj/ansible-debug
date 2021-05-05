@@ -1,12 +1,25 @@
 ---
 - name: test serial strategies with Tower 
-  hosts: all 
-  serial: 1
+  hosts: localhost 
+  connection: local
+  vars:
+    win_initial_password: $Ry3h0m3bus
+    win_initial_password_verify: $34Science
+    ad_regex: '(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'
+    valid_password: "{{ win_initial_password | regex_search(ad_regex) }}"
   tasks:
-    - name: print something 
-      debug:
-        msg: "Hello world"
+    - name: Validate password 
+      block:
+      - name: print valid password and escaped regex 
+        debug:
+          var: valid_password
 
-    - name: print something 
-      debug:
-        msg: "goodbye world"
+      - name: Fail if passwords don't match
+        fail:
+          msg: "Entered passwords do not match, please try again."
+        failed_when: win_initial_password != win_initial_password_verify
+
+      - name: Fail if passwords doesn't meet required complexity
+        fail:
+          msg: "Entered password does not meet required complexity, please try again."
+        failed_when: valid_password == ''

@@ -1,0 +1,17 @@
+{
+  "name": "",
+  "description": "",
+  "spec": [
+      {
+          "question_name": "Select a server to deprovision",
+          "question_description": "",
+          "required": true,
+          "type": "multiplechoice",
+          "variable": "serverFunction",
+          "min": null,
+          "max": null,
+          "default": "",
+          "choices": "ansible-pizza-jerry\nansible-dough-jerry\nansible-pizza-jerry\nansible-salad-jerry"
+      }
+  ]
+}

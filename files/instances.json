@@ -1,0 +1,414 @@
+{
+    "ec2_instances": {
+        "instances": [
+            {
+                "ami_launch_index": 0,
+                "image_id": "ami-0229f7666f517b31e",
+                "instance_id": "i-0a562801c174cfad3",
+                "instance_type": "t2.medium",
+                "launch_time": "2021-01-26T22:35:40+00:00",
+                "monitoring": {
+                    "state": "disabled"
+                },
+                "placement": {
+                    "availability_zone": "us-east-1a",
+                    "group_name": "",
+                    "tenancy": "default"
+                },
+                "platform": "windows",
+                "private_dns_name": "",
+                "product_codes": [],
+                "public_dns_name": "",
+                "state": {
+                    "code": 48,
+                    "name": "terminated"
+                },
+                "state_transition_reason": "User initiated (2021-01-26 23:16:33 GMT)",
+                "architecture": "x86_64",
+                "block_device_mappings": [],
+                "client_token": "5cc71143fdae471eb59b81194583ce53",
+                "ebs_optimized": false,
+                "ena_support": true,
+                "hypervisor": "xen",
+                "network_interfaces": [],
+                "root_device_name": "/dev/sda1",
+                "root_device_type": "ebs",
+                "security_groups": [],
+                "state_reason": {
+                    "code": "Client.UserInitiatedShutdown",
+                    "message": "Client.UserInitiatedShutdown: User initiated shutdown"
+                },
+                "tags": {
+                    "ServiceOwner": "UserName: jcorum, Role: 605251984176-poweruser (role)",
+                    "app": "ansible-demo-jerry",
+                    "function": "web-jerry",
+                    "Name": "ansible-pizza-jerry"
+                },
+                "virtualization_type": "hvm",
+                "cpu_options": {
+                    "core_count": 2,
+                    "threads_per_core": 1
+                },
+                "capacity_reservation_specification": {
+                    "capacity_reservation_preference": "open"
+                },
+                "hibernation_options": {
+                    "configured": false
+                }
+            },
+            {
+                "ami_launch_index": 0,
+                "image_id": "ami-0229f7666f517b31e",
+                "instance_id": "i-0cb10ae6bd979852f",
+                "instance_type": "t2.medium",
+                "launch_time": "2021-01-26T23:29:04+00:00",
+                "monitoring": {
+                    "state": "disabled"
+                },
+                "placement": {
+                    "availability_zone": "us-east-1a",
+                    "group_name": "",
+                    "tenancy": "default"
+                },
+                "platform": "windows",
+                "private_dns_name": "ip-10-0-185-217.ec2.internal",
+                "private_ip_address": "10.0.185.217",
+                "product_codes": [],
+                "public_dns_name": "ec2-3-209-11-165.compute-1.amazonaws.com",
+                "public_ip_address": "3.209.11.165",
+                "state": {
+                    "code": 16,
+                    "name": "running"
+                },
+                "state_transition_reason": "",
+                "subnet_id": "subnet-00bebfdf800ecfff0",
+                "vpc_id": "vpc-07008c9fa12a22fc3",
+                "architecture": "x86_64",
+                "block_device_mappings": [
+                    {
+                        "device_name": "/dev/sda1",
+                        "ebs": {
+                            "attach_time": "2021-01-26T23:29:05+00:00",
+                            "delete_on_termination": true,
+                            "status": "attached",
+                            "volume_id": "vol-093c375f353bec20f"
+                        }
+                    }
+                ],
+                "client_token": "92d1c939f6a849c4927fc098b42abd95",
+                "ebs_optimized": false,
+                "ena_support": true,
+                "hypervisor": "xen",
+                "network_interfaces": [
+                    {
+                        "association": {
+                            "ip_owner_id": "amazon",
+                            "public_dns_name": "ec2-3-209-11-165.compute-1.amazonaws.com",
+                            "public_ip": "3.209.11.165"
+                        },
+                        "attachment": {
+                            "attach_time": "2021-01-26T23:29:04+00:00",
+                            "attachment_id": "eni-attach-0f2c1339fff222fa1",
+                            "delete_on_termination": true,
+                            "device_index": 0,
+                            "status": "attached"
+                        },
+                        "description": "",
+                        "groups": [
+                            {
+                                "group_name": "ansible-jerry-sec-group",
+                                "group_id": "sg-09c770d05b1a3a57b"
+                            }
+                        ],
+                        "ipv6_addresses": [],
+                        "mac_address": "02:d9:73:02:02:43",
+                        "network_interface_id": "eni-0fa4e4a8c6c0edec7",
+                        "owner_id": "605251984176",
+                        "private_dns_name": "ip-10-0-185-217.ec2.internal",
+                        "private_ip_address": "10.0.185.217",
+                        "private_ip_addresses": [
+                            {
+                                "association": {
+                                    "ip_owner_id": "amazon",
+                                    "public_dns_name": "ec2-3-209-11-165.compute-1.amazonaws.com",
+                                    "public_ip": "3.209.11.165"
+                                },
+                                "primary": true,
+                                "private_dns_name": "ip-10-0-185-217.ec2.internal",
+                                "private_ip_address": "10.0.185.217"
+                            }
+                        ],
+                        "source_dest_check": true,
+                        "status": "in-use",
+                        "subnet_id": "subnet-00bebfdf800ecfff0",
+                        "vpc_id": "vpc-07008c9fa12a22fc3",
+                        "interface_type": "interface"
+                    }
+                ],
+                "root_device_name": "/dev/sda1",
+                "root_device_type": "ebs",
+                "security_groups": [
+                    {
+                        "group_name": "ansible-jerry-sec-group",
+                        "group_id": "sg-09c770d05b1a3a57b"
+                    }
+                ],
+                "source_dest_check": true,
+                "tags": {
+                    "ServiceOwner": "UserName: jcorum, Role: 605251984176-poweruser (role)",
+                    "function": "web-jerry",
+                    "app": "ansible-demo-jerry",
+                    "Name": "ansible-dough-jerry"
+                },
+                "virtualization_type": "hvm",
+                "cpu_options": {
+                    "core_count": 2,
+                    "threads_per_core": 1
+                },
+                "capacity_reservation_specification": {
+                    "capacity_reservation_preference": "open"
+                },
+                "hibernation_options": {
+                    "configured": false
+                }
+            },
+            {
+                "ami_launch_index": 0,
+                "image_id": "ami-0229f7666f517b31e",
+                "instance_id": "i-031b399ac8ec9a0fa",
+                "instance_type": "t2.medium",
+                "launch_time": "2021-01-26T23:26:04+00:00",
+                "monitoring": {
+                    "state": "disabled"
+                },
+                "placement": {
+                    "availability_zone": "us-east-1a",
+                    "group_name": "",
+                    "tenancy": "default"
+                },
+                "platform": "windows",
+                "private_dns_name": "ip-10-0-103-187.ec2.internal",
+                "private_ip_address": "10.0.103.187",
+                "product_codes": [],
+                "public_dns_name": "ec2-3-239-219-197.compute-1.amazonaws.com",
+                "public_ip_address": "3.239.219.197",
+                "state": {
+                    "code": 16,
+                    "name": "running"
+                },
+                "state_transition_reason": "",
+                "subnet_id": "subnet-00bebfdf800ecfff0",
+                "vpc_id": "vpc-07008c9fa12a22fc3",
+                "architecture": "x86_64",
+                "block_device_mappings": [
+                    {
+                        "device_name": "/dev/sda1",
+                        "ebs": {
+                            "attach_time": "2021-01-26T23:26:06+00:00",
+                            "delete_on_termination": true,
+                            "status": "attached",
+                            "volume_id": "vol-0b0d7eeb1cd701d72"
+                        }
+                    }
+                ],
+                "client_token": "14eb6801bdb7400e896748dd1f963a95",
+                "ebs_optimized": false,
+                "ena_support": true,
+                "hypervisor": "xen",
+                "network_interfaces": [
+                    {
+                        "association": {
+                            "ip_owner_id": "amazon",
+                            "public_dns_name": "ec2-3-239-219-197.compute-1.amazonaws.com",
+                            "public_ip": "3.239.219.197"
+                        },
+                        "attachment": {
+                            "attach_time": "2021-01-26T23:26:04+00:00",
+                            "attachment_id": "eni-attach-018ef01e9262f6554",
+                            "delete_on_termination": true,
+                            "device_index": 0,
+                            "status": "attached"
+                        },
+                        "description": "",
+                        "groups": [
+                            {
+                                "group_name": "ansible-jerry-sec-group",
+                                "group_id": "sg-09c770d05b1a3a57b"
+                            }
+                        ],
+                        "ipv6_addresses": [],
+                        "mac_address": "02:e9:9c:82:92:1b",
+                        "network_interface_id": "eni-078803a829be6f305",
+                        "owner_id": "605251984176",
+                        "private_dns_name": "ip-10-0-103-187.ec2.internal",
+                        "private_ip_address": "10.0.103.187",
+                        "private_ip_addresses": [
+                            {
+                                "association": {
+                                    "ip_owner_id": "amazon",
+                                    "public_dns_name": "ec2-3-239-219-197.compute-1.amazonaws.com",
+                                    "public_ip": "3.239.219.197"
+                                },
+                                "primary": true,
+                                "private_dns_name": "ip-10-0-103-187.ec2.internal",
+                                "private_ip_address": "10.0.103.187"
+                            }
+                        ],
+                        "source_dest_check": true,
+                        "status": "in-use",
+                        "subnet_id": "subnet-00bebfdf800ecfff0",
+                        "vpc_id": "vpc-07008c9fa12a22fc3",
+                        "interface_type": "interface"
+                    }
+                ],
+                "root_device_name": "/dev/sda1",
+                "root_device_type": "ebs",
+                "security_groups": [
+                    {
+                        "group_name": "ansible-jerry-sec-group",
+                        "group_id": "sg-09c770d05b1a3a57b"
+                    }
+                ],
+                "source_dest_check": true,
+                "tags": {
+                    "function": "web-jerry",
+                    "Name": "ansible-pizza-jerry",
+                    "app": "ansible-demo-jerry",
+                    "ServiceOwner": "UserName: jcorum, Role: 605251984176-poweruser (role)"
+                },
+                "virtualization_type": "hvm",
+                "cpu_options": {
+                    "core_count": 2,
+                    "threads_per_core": 1
+                },
+                "capacity_reservation_specification": {
+                    "capacity_reservation_preference": "open"
+                },
+                "hibernation_options": {
+                    "configured": false
+                }
+            },
+            {
+                "ami_launch_index": 0,
+                "image_id": "ami-0229f7666f517b31e",
+                "instance_id": "i-0101aa1890d86d8ec",
+                "instance_type": "t2.medium",
+                "launch_time": "2021-01-26T23:35:03+00:00",
+                "monitoring": {
+                    "state": "disabled"
+                },
+                "placement": {
+                    "availability_zone": "us-east-1a",
+                    "group_name": "",
+                    "tenancy": "default"
+                },
+                "platform": "windows",
+                "private_dns_name": "ip-10-0-195-88.ec2.internal",
+                "private_ip_address": "10.0.195.88",
+                "product_codes": [],
+                "public_dns_name": "ec2-3-215-175-92.compute-1.amazonaws.com",
+                "public_ip_address": "3.215.175.92",
+                "state": {
+                    "code": 16,
+                    "name": "running"
+                },
+                "state_transition_reason": "",
+                "subnet_id": "subnet-00bebfdf800ecfff0",
+                "vpc_id": "vpc-07008c9fa12a22fc3",
+                "architecture": "x86_64",
+                "block_device_mappings": [
+                    {
+                        "device_name": "/dev/sda1",
+                        "ebs": {
+                            "attach_time": "2021-01-26T23:35:04+00:00",
+                            "delete_on_termination": true,
+                            "status": "attached",
+                            "volume_id": "vol-0118a410697900986"
+                        }
+                    }
+                ],
+                "client_token": "5fc3c5cfdab94f30b59d8480bc6b7df2",
+                "ebs_optimized": false,
+                "ena_support": true,
+                "hypervisor": "xen",
+                "network_interfaces": [
+                    {
+                        "association": {
+                            "ip_owner_id": "amazon",
+                            "public_dns_name": "ec2-3-215-175-92.compute-1.amazonaws.com",
+                            "public_ip": "3.215.175.92"
+                        },
+                        "attachment": {
+                            "attach_time": "2021-01-26T23:35:03+00:00",
+                            "attachment_id": "eni-attach-0df5022aa381969be",
+                            "delete_on_termination": true,
+                            "device_index": 0,
+                            "status": "attached"
+                        },
+                        "description": "",
+                        "groups": [
+                            {
+                                "group_name": "ansible-jerry-sec-group",
+                                "group_id": "sg-09c770d05b1a3a57b"
+                            }
+                        ],
+                        "ipv6_addresses": [],
+                        "mac_address": "02:47:1a:fa:9e:71",
+                        "network_interface_id": "eni-0fe7f92d7b0bc83ec",
+                        "owner_id": "605251984176",
+                        "private_dns_name": "ip-10-0-195-88.ec2.internal",
+                        "private_ip_address": "10.0.195.88",
+                        "private_ip_addresses": [
+                            {
+                                "association": {
+                                    "ip_owner_id": "amazon",
+                                    "public_dns_name": "ec2-3-215-175-92.compute-1.amazonaws.com",
+                                    "public_ip": "3.215.175.92"
+                                },
+                                "primary": true,
+                                "private_dns_name": "ip-10-0-195-88.ec2.internal",
+                                "private_ip_address": "10.0.195.88"
+                            }
+                        ],
+                        "source_dest_check": true,
+                        "status": "in-use",
+                        "subnet_id": "subnet-00bebfdf800ecfff0",
+                        "vpc_id": "vpc-07008c9fa12a22fc3",
+                        "interface_type": "interface"
+                    }
+                ],
+                "root_device_name": "/dev/sda1",
+                "root_device_type": "ebs",
+                "security_groups": [
+                    {
+                        "group_name": "ansible-jerry-sec-group",
+                        "group_id": "sg-09c770d05b1a3a57b"
+                    }
+                ],
+                "source_dest_check": true,
+                "tags": {
+                    "ServiceOwner": "UserName: jcorum, Role: 605251984176-poweruser (role)",
+                    "app": "ansible-demo-jerry",
+                    "function": "web-jerry",
+                    "Name": "ansible-salad-jerry"
+                },
+                "virtualization_type": "hvm",
+                "cpu_options": {
+                    "core_count": 2,
+                    "threads_per_core": 1
+                },
+                "capacity_reservation_specification": {
+                    "capacity_reservation_preference": "open"
+                },
+                "hibernation_options": {
+                    "configured": false
+                }
+            }
+        ],
+        "failed": false,
+        "changed": false
+    },
+    "_ansible_verbose_always": true,
+    "_ansible_no_log": false,
+    "changed": false
+}

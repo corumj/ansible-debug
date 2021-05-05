@@ -1,0 +1,7 @@
+localhost ansible_connection=local 
+
+[web]
+localhost
+
+[web:vars]
+pizza=good
