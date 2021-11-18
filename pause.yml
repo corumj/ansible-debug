@@ -1,0 +1,12 @@
+---
+- name: debug with pause to check temp files
+  hosts: localhost
+  connection: local
+  tasks:
+    - debug:
+        msg: "Pausing for 10 minutes"
+    - name: Pause 
+      pause:
+        minutes: 10
+    - debug:
+        msg: "Paused complete"
