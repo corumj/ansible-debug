@@ -12,4 +12,5 @@
     - debug:
         var: response 
 
-
+    - debug:
+        msg: "{{ response | json_query('fields[*].name') }}"
