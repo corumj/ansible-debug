@@ -1,25 +1,15 @@
 ---
-- name: test serial strategies with Tower 
+- name: test json query 
   hosts: localhost 
   connection: local
-  vars:
-    win_initial_password: $Ry3h0m3bus
-    win_initial_password_verify: $34Science
-    ad_regex: '(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'
-    valid_password: "{{ win_initial_password | regex_search(ad_regex) }}"
+
   tasks:
-    - name: Validate password 
-      block:
-      - name: print valid password and escaped regex 
-        debug:
-          var: valid_password
+    - name: Query URL for JSON 
+      uri:
+        url: https://sampleserver6.arcgisonline.com/arcgis/rest/services/Earthquakes_Since1970/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&having=&gdbVersion=&historicMoment=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=xyFootprint&resultOffset=&resultRecordCount=&returnTrueCurves=false&returnExceededLimitFeatures=false&quantizationParameters=&returnCentroid=false&sqlFormat=none&resultType=&featureEncoding=esriDefault&f=json
+      register: response 
 
-      - name: Fail if passwords don't match
-        fail:
-          msg: "Entered passwords do not match, please try again."
-        failed_when: win_initial_password != win_initial_password_verify
+    - debug:
+        var: response 
 
-      - name: Fail if passwords doesn't meet required complexity
-        fail:
-          msg: "Entered password does not meet required complexity, please try again."
-        failed_when: valid_password == ''
+
