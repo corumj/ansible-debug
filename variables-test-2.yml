@@ -6,7 +6,7 @@
 
   tasks: 
     - name: Generate some Toppings 
-      set_stat: 
+      set_stats: 
         data:
           pepperoni: true 
           red_pepper: true 

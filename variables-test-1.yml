@@ -6,7 +6,7 @@
 
   tasks: 
     - name: Generate some dough 
-      set_stat: 
+      set_stats: 
         data:
           ferment: true 
           desc: "Dough is the most important part of pizza"
