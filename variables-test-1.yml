@@ -2,7 +2,7 @@
 ## First node playbook in test of passing
 ## variables between workflow nodes 
 - name: Test variables
-  hosts: demo_pizza 
+  hosts: localhost 
 
   tasks: 
     - name: Generate some dough 
