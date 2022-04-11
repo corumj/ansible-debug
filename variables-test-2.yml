@@ -1,0 +1,14 @@
+---
+## First node playbook in test of passing
+## variables between workflow nodes 
+- name: Test variables
+  hosts: demo_toppings
+
+  tasks: 
+    - name: Generate some Toppings 
+      set_stat: 
+        data:
+          pepperoni: true 
+          red_pepper: true 
+          ricotta: true 
+          desc: "Toppings are the most important part of pizza"

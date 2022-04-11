@@ -1,25 +1,574 @@
 ---
-- name: test serial strategies with Tower 
-  hosts: localhost 
-  connection: local
+- name: Test creating jinja2 template with getent output
+  hosts: localhost
+  connection: local 
+  gather_facts: no
   vars:
-    win_initial_password: $Ry3h0m3bus
-    win_initial_password_verify: $34Science
-    ad_regex: '(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'
-    valid_password: "{{ win_initial_password | regex_search(ad_regex) }}"
+    network_info:
+      value:
+      - name: CC-General
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116663
+      - name: RD-CC-Class-Infra (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713919
+      - name: WW-MSEDGE (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609297
+      - name: RW-DMZ-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403245
+      - name: RD-INET-Appliance
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-230478
+      - name: rj-vSAN-dvSwtich-DVUplinks-1396349
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396350
+      - name: ww-dvSwitch (1)-DVUplinks-609281
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609282
+      - name: WW-DMZ-SLB (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609294
+      - name: RJ-Bus-Infra
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116671
+      - name: RW-DC-ACAD
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403237
+      - name: RD-CC-STLCC-Infra
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166428
+      - name: WW-BUS-DATA-APP-SLB
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-69
+      - name: RJ-F5-Prod-Svr-B
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-446314
+      - name: RW-BUS-DATA-APP
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403230
+      - name: RD-WW-Class-App
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166490
+      - name: RW-MSEDGE
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403252
+      - name: WW-MSEDGE
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-70
+      - name: WW-BUS-INFRA
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-68
+      - name: VCHA
+        type: STANDARD_PORTGROUP
+        network: network-535994
+      - name: RD-CC-STLCC-AppACE (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713906
+      - name: WW-ACAD-INFRA
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-79
+      - name: WW-DC-ACAD (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609287
+      - name: Not connected
+        type: STANDARD_PORTGROUP
+        network: network-1424689
+      - name: RD-CC-STLCC-App (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713924
+      - name: RJ-vSAN-vSAN
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396361
+      - name: WW-WinstreamSIP
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1220652
+      - name: RJ-vSAN-RJ-Bus-Apps
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396394
+      - name: WW-DMZ-F5 (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609284
+      - name: WW-DMZ-SLB
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-74
+      - name: RD-WW-MSReplicate
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-187819
+      - name: RD-WW-Class-Infra
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166474
+      - name: RD-WW-Class-App (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713908
+      - name: rw-vMotion
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403212
+      - name: RD-WW-STLCC-Infra (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713907
+      - name: RJ-Bus-Apps2
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-446310
+      - name: WW-BUS-DATA-MGMT (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609286
+      - name: RW-BUS-APPS2
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1463697
+      - name: RD-CC-EdgeInside (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713921
+      - name: WW-GUEST-WIRELESS
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-80
+      - name: RJ-vSAN-RJ-DMZ-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396403
+      - name: RJ-ERP-Apps-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116664
+      - name: RD-CC-MANAGEMENT (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713918
+      - name: RJ-vSAN-CC-General
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396385
+      - name: RJ-vSAN-RJ-DMZ
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396402
+      - name: WW-BUS-DATA-APPS-F5 (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609283
+      - name: WW-BUS-DATA-APP
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-67
+      - name: RJ-F5-Prod-Svr-A
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-446313
+      - name: RD-CC-DMZ (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713913
+      - name: RJ-vSAN-vMotion
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396360
+      - name: RD-WW-DMZ
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166471
+      - name: RW-NETADMIN
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403253
+      - name: RJ-Backup
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116668
+      - name: rd-dvSwitch-DVUplinks-166404
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166405
+      - name: RD-WW-Class-Infra (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713905
+      - name: RJ-F5-Test-Svr-A
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-446315
+      - name: WW-DMZ (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609298
+      - name: RJ-vSAN-RJ-Acad-Apps
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396389
+      - name: WW-DC-ADMIN
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-75
+      - name: RJ-DMZ
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116665
+      - name: WW-ACAD-INFRA (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609289
+      - name: WW-BUS-DATA-APP (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609290
+      - name: Not connected
+        type: STANDARD_PORTGROUP
+        network: network-1408474
+      - name: WW-ACAD-APPS
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-72
+      - name: RJ-vSAN-Bus-MGMT
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396357
+      - name: RJ-Bus-Apps-F5-Sniff
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-139712
+      - name: RD-CC-MSReplicate
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166449
+      - name: GuestWireless
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116659
+      - name: RJ-vSAN-RJ-Acad-Apps-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396391
+      - name: RD-CC-Class-AppACE
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166468
+      - name: RD-CC-STLCC-App
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166444
+      - name: RD-CC-DMZACE (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713912
+      - name: STLCC-VIRTUAL-LAB-5 RJ-vSAN-Bus-MGMT
+        type: STANDARD_PORTGROUP
+        network: network-1477822
+      - name: RW-BUS-DATA-MGMT
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403208
+      - name: RW-BUS-DATA-APPS-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403233
+      - name: WW-BUS-DATA-SERV (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609296
+      - name: RD-WW-MSReplicate (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713902
+      - name: RD-CC-Class-AppACE (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713920
+      - name: RJ-Acad-Apps-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-446311
+      - name: RW-BUS-DATA2
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1463699
+      - name: RJ-vSAN-RJ-Acad-Infra
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396392
+      - name: RD-CC-STLCC-AppACE
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166451
+      - name: RW-WinstreamSIP
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403254
+      - name: RW-BUS-APPS2-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1463696
+      - name: RW-BUS-INFRA-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1463695
+      - name: WW-DMZ-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-656
+      - name: RD-WW-EdgeInside (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713909
+      - name: RW-STLCC-Admins
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1463698
+      - name: RJ-Bus-Data
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-138152
+      - name: RW-DC-SERVERS
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403243
+      - name: RJ-Capture
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1185293
+      - name: RJ-vSAN-AUX-VENDOR
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396382
+      - name: WW-BUS-DATA-APP-SLB (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609285
+      - name: VM Network
+        type: STANDARD_PORTGROUP
+        network: network-1403185
+      - name: RJ-vSAN-RJ-Backup
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396393
+      - name: WW-DMZ
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-81
+      - name: WW-NETADMIN
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1171
+      - name: RD-CC-ShoreTel
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-617360
+      - name: RJ-vSAN-AUX-PCI
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1453852
+      - name: RD-CC-STLCC-Infra (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713914
+      - name: RW-INFRASTRUCTURE
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1412585
+      - name: RJ-vSAN-RJ-Capture
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396401
+      - name: RD-WW-DMZACE (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713910
+      - name: RD-WW-DMZ (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713911
+      - name: ww-dvSwitch-DVUplinks-65
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-66
+      - name: RJ-vSAN-GuestWireless
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396386
+      - name: WW-BUS-DATA-SERV
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-71
+      - name: WW-DC-SERVERS (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609291
+      - name: RW-ACAD-INFRA
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403226
+      - name: RJ-Bus-Apps
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116672
+      - name: RJ-vSAN-RJ-Bus-Apps2
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396397
+      - name: RD-CC-Class-Infra
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166469
+      - name: RJ-Bus-Apps-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116673
+      - name: RJ-vSAN-RJ-Edge-Inside
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396404
+      - name: rw-vSAN
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403219
+      - name: RD-INET-Appliance (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713901
+      - name: WW-NETADMIN (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609299
+      - name: RJ-Bus-MGMT
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-130428
+      - name: rw-vSAN-dvSwitch-DVUplinks-1403195
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403196
+      - name: RD-CC-Class-App
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166467
+      - name: RW-BUS-DATA-APP-SLB
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403231
+      - name: RD-WW-STLCC-Data (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713916
+      - name: RW-ACAD-APPS
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403224
+      - name: RW-BUS-INFRA
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403236
+      - name: RD-WW-STLCC-Data
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166448
+      - name: RW-DMZ
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403244
+      - name: RJ-INFRASTRUCTURE
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-107322
+      - name: RJ-NetAdmin
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116667
+      - name: GuestFreeAccess
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1463694
+      - name: RJ-vSAN-RJ-ERP-Apps-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396405
+      - name: RJ-vSAN-RJ-NetAdmin
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396413
+      - name: RD-WW-EdgeInside
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166450
+      - name: RD-CC-MANAGEMENT
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166447
+      - name: WW-BUS-DATA-APPS-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-657
+      - name: RD-WW-DMZACE
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166472
+      - name: RJ-vSAN-RJ-Bus-Data
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396399
+      - name: rj-dvSwitch-DVUplinks-103488
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-103489
+      - name: RD-WW-STLCC-AppACE
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166487
+      - name: RJ-Bus-Apps2-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-446312
+      - name: RJ-vSAN-RJ-F5-Test-Svr-B
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396411
+      - name: RJ-vSAN-RJ-INFRASTRUCTURE
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396412
+      - name: RD-CC-MSReplicate (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713915
+      - name: RJ-vSAN-RJ-Bus-Infra
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396400
+      - name: VM Network
+        type: STANDARD_PORTGROUP
+        network: network-1396345
+      - name: RD-CC-DMZ
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166429
+      - name: RJ-Acad-Infra
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116661
+      - name: RJ-Acad-Apps
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116662
+      - name: RW-WirelessTrunk
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1420059
+      - name: RJ-vSAN-InfoSys-Public
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396387
+      - name: RW-BUS-DATA-SERV
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403234
+      - name: WW-DC-ADMIN (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609293
+      - name: RD-CC-STLCC-Data
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166445
+      - name: WW-DC-SERVERS
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-73
+      - name: InfoSys-Public
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116660
+      - name: RJ-vSAN-RJ-F5-Prod-Svr-A
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396406
+      - name: RJ-vSAN-RJ-Bus-Apps-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396395
+      - name: RJ-vSAN-RJ-Bus-Apps-F5-Sniff
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396396
+      - name: RJ-DMZ-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116666
+      - name: RW-GUEST-WIRELESS
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403249
+      - name: RD-WW-STLCC-Infra
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166473
+      - name: WW-BUS-INFRA (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609288
+      - name: RJ-vSAN-RJ-F5-Prod-Svr-B
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396407
+      - name: VM Network
+        type: STANDARD_PORTGROUP
+        network: network-39
+      - name: RD-WW-STLCC-App (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713904
+      - name: AUX-VENDOR
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-799539
+      - name: RJ-vSAN-RJ-Bus-Infra-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1474184
+      - name: RJ-vSAN-RJ-Bus-Apps2-F5
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396398
+      - name: RD-CC-DMZACE
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166470
+      - name: RD-WW-STLCC-App
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-166475
+      - name: WW-GUEST-WIRELESS (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609295
+      - name: rd-dvSwitch (1)-DVUplinks-713899
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713900
+      - name: RD-CC-ShoreTel (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713903
+      - name: WW-DC-ACAD
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-76
+      - name: WW-BUS-DATA-MGMT
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-77
+      - name: RD-WW-STLCC-AppACE (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713917
+      - name: RJ-vSAN-RJ-F5-Test-Svr-A
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1396408
+      - name: WW-ACAD-APPS (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-609292
+      - name: RD-CC-EdgeInside
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-179092
+      - name: RJ-F5-Test-Svr-B
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-446316
+      - name: RW-DC-ADMIN
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403239
+      - name: RJ-Edge-Inside
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-116669
+      - name: RD-CC-Class-App (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713923
+      - name: RW-DMZ-SLB
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-1403247
+      - name: VMotion
+        type: STANDARD_PORTGROUP
+        network: network-672463
+      - name: RD-CC-STLCC-Data (1)
+        type: DISTRIBUTED_PORTGROUP
+        network: dvportgroup-713922
+      failed: false
+      changed: false
+    _ansible_verbose_always: true
+    _ansible_no_log: false
+    changed: false
+    test_name: CC-General
+    
+
   tasks:
-    - name: Validate password 
-      block:
-      - name: print valid password and escaped regex 
-        debug:
-          var: valid_password
-
-      - name: Fail if passwords don't match
-        fail:
-          msg: "Entered passwords do not match, please try again."
-        failed_when: win_initial_password != win_initial_password_verify
-
-      - name: Fail if passwords doesn't meet required complexity
-        fail:
-          msg: "Entered password does not meet required complexity, please try again."
-        failed_when: valid_password == ''
+    - name: Test json_query
+      debug:
+        msg: "{{ network_info | json_query(test_query) }}"
+      vars: 
+        test_query: value[?name=='{{ test_name }}'].network

@@ -1,0 +1,5 @@
+{% for key, value in getent_groups.ansible_facts.getent_group.items() if key in search_groups %}
+List of users in the {{ key }} group: 
+  Members: {{ value[2] }} 
+
+{% endfor %}

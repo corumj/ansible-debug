@@ -1,0 +1,12 @@
+---
+## First node playbook in test of passing
+## variables between workflow nodes 
+- name: Test variables
+  hosts: demo_pizza 
+
+  tasks: 
+    - name: Generate some dough 
+      set_stat: 
+        data:
+          ferment: true 
+          desc: "Dough is the most important part of pizza"

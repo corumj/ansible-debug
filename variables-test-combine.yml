@@ -1,0 +1,12 @@
+---
+- name: Test access to set_stat variables from prior workflow nodes
+  hosts: localhost
+
+  tasks:
+    - name: Print some facts from other workflow nodes 
+      debug:
+        msg:  
+          - "Dough was fermented (play 1): {{ ferment }}"
+          - "Pepperoni: {{ pepperoni }}"
+          - "Red Pepper: {{ red_pepper }}"
+          - "Ricotta: {{ ricotta }}"
