@@ -1,0 +1,37 @@
+--- 
+- name: Get AAP cluster and component versions
+  hosts: localhost 
+
+  vars:
+    aap_host: ansible.aj.peripatetic.us 
+    aap_bearer_token: "<your token here>" 
+      # options for generating tokens: https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-token-based-authentication 
+      # I am keeping it simple but not as safe as the above options - 
+      # 1. Logged in to AAP, click on your username and select "User Details" from the dropdown 
+      # 2. Click on the API Tokens tab and click Create API Token 
+      # 3. Give the token a name, and set the Scope to "Read".  Everything else can be blank.
+      # 4. Click the blue "Create Token" button in the bottom left to finish creating the token 
+      # 5. SAVE THE TOKEN.  You'll only get to see it this once, so grab it and save it but don't check it in to git 
+
+  tasks:
+
+    - name: Get AAP Versions 
+      ansible.builtin.uri: 
+        url: https://{{ aap_host }}/api/{{ item }}
+        method: GET 
+        headers:
+          Authorization: "Bearer {{ aap_bearer_token }}"
+      register: login_response 
+      loop: 
+        - gateway/v1/               # Gets us the overall cluster version 
+        - eda/v1/config             # Gets us the EDA component version 
+        - galaxy/                   # Gets us the Automation Hub version 
+        - controller/v2/            # Gets us the Controller version 
+
+    - name: Print out versions 
+      ansible.builtin.debug:
+        msg: 
+          - "AAP Version (Gateway): {{ login_response.results[0].x_api_product_version }}"
+          - "AAP EDA Version: {{ login_response.results[1].json.version }}"
+          - "AAP Automation Hub(Galaxy NG) Version: {{ login_response.results[2].json.server_version }}"
+          - "AAP Controller Version: {{ login_response.results[3].x_api_product_version }}"
