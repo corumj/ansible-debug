@@ -1,0 +1,47 @@
+--- 
+- name: Validate kernel version for copy-fail remediation
+  hosts: copyfail_systems  ## consider using all and the limit field in AAP to scope testing 
+      ## could also consider running on groups made from the OS version - e.g. all RHEL 8 systems
+      ## if there are a lot of systems to validate and the groups already exists that 
+      ## could be significantly faster than checking the OS each time 
+  vars: 
+    fixed_kernel_versions:  ## I still need to check these against the Red Hat KB article to confirm
+      rhel8: 4.18.0-553.123.1.el8_10.x86_64 # specific to rhel 8.10 
+      rhel9: 5.14.0-611.54.1.el9_7.x86_64 # specific to rhel 9.7 
+      rhel10: 6.12.0-124.55.1.el10_1.x86_64 # specific to rhel 10.1
+
+  tasks:
+    - name: Print current kernel versions for inventory 
+      ansible.builtin.debug:
+        var: ansible_kernel 
+
+    - name: Print debug
+      ansible.builtin.debug:
+        msg: "{{ ansible_kernel is version(fixed_kernel_versions.rhel10, '>=') }}" 
+
+    - name: Test RHEL 10 systems in inventory 
+      ansible.builtin.assert: 
+        that: 
+          "ansible_kernel is version(fixed_kernel_versions.rhel10, '>=')"
+        fail_msg: "'ansible_kernel' must be greater than {{ fixed_kernel_versions.rhel10 }}"
+        success_msg: "This systems kernel is patched"
+      when: ansible_distribution_version == "10.1"
+
+    - name: Test RHEL 9 systems in inventory 
+      ansible.builtin.assert: 
+        that: 
+          "ansible_kernel is version(fixed_kernel_versions.rhel9, '>=')"
+        fail_msg: "'ansible_kernel' must be greater than {{ fixed_kernel_versions.rhel9 }}"
+        success_msg: "This systems kernel is patched"
+      when: ansible_distribution_version == "9.7"
+
+    - name: Test RHEL 8 systems in inventory 
+      ansible.builtin.assert: 
+        that: 
+          "ansible_kernel is version(fixed_kernel_versions.rhel8, '>=')"
+        fail_msg: "'ansible_kernel' must be greater than {{ fixed_kernel_versions.rhel8 }}"
+        success_msg: "This systems kernel is patched"
+      when: ansible_distribution_version == "8.10"
+      ## if you get a str/int comparison error, the RHEL 8 version is very old and needs patched
+      
+
